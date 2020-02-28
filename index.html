@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <title>My Chart.js Chart</title>
+</head>
+<body>
+    <div class="container">
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script>
+        let myChart = document.getElementById('myChart').getContext('2d');
+        var barChartData = {
+                labels:['Tax Brackets', 'Your Income', 'Tax Owed'],
+                datasets:[{
+                    label:'At 10% Tax Rate',
+                    backgroundColor: window.chartColors.red,
+                    data:[
+                        200,
+                        400,
+                        150
+                    ]
+                }, {
+                    label:'At 20% Tax Rate',
+                    backgroundColor: window.chartColors.red,
+                    data:[
+                        200,
+                        400,
+                        150
+                    ]
+                }, {
+                    label:'At 30% Tax Rate',
+                    backgroundColor: window.chartColors.red,
+                    data:[
+                        200,
+                        400,
+                        150
+                    ]
+                }]
+            };
+
+        let massPopChart = new Chart(myChart, {
+            type:'bar',
+            data:barChartData,
+            options:{
+                title: {
+                    display: true,
+                    text: 'Interactive Tax Bracket Visual'
+                },
+                responsive: true,
+                scales: {
+                    xAxes: [{
+							stacked: true,
+						}],
+                    yAxes: [{
+                        stacked: true
+                    }] 
+                }
+            }
+        });
+    </script>
+</body>
+</html>
