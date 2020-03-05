@@ -4,96 +4,132 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <title>My Chart.js Chart</title>
 </head>
-<body>
-    <div class="container">
-        <canvas id="myChart"></canvas>
+<body class='bg-white py-5'>
+    <div class="row">
+        <div class="col-md-4 offset-md-2">
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Tax Rate</th>
+                    <th scope="col">Single filer</th>
+                    <th scope="col">Married filing jointly</th>
+                    <th scope="col">Head of household</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">10%</th>
+                    <td>$0 – $9,700</td>
+                    <td>$0 – $13,850</td>
+                    <td>$0 – $19,400</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">12%</th>
+                    <td>$9,701 – $39,475</td>
+                    <td>$13,851 – $52,850</td>
+                    <td>$19,401 – $78,950</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">22%</th>
+                    <td>$39,476 – $84,200</td>
+                    <td>$52,851 – $84,200</td>
+                    <td>$78,951 – $168,400</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">24%</th>
+                    <td>$84,201 – $160,725</td>
+                    <td>$84,201 – $160,700</td>
+                    <td>$168,401 – $321,450</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">32%</th>
+                    <td>$160,726 – $204,100</td>
+                    <td>$160,701 – $204,100</td>
+                    <td>$321,451 – $408,200</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">35%</th>
+                    <td>$204,101 – $510,300</td>
+                    <td>$204,101 – $510,300</td>
+                    <td>$408,201 – $612,350</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">37%</th>
+                    <td>$510,301 or more</td>
+                    <td>$510,301 or more</td>
+                    <td>$612,351 or more</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>        
     </div>
+    <div class="row">
+        <div class="col-md-4 offset-md-2">
+            <div class="card">
+                <div class="card-body">                
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <p>Annual Income: </p>
+                        </div>
+                        <div class="col-sm-3">
+                            <span id="incomeNumber"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <p>Standard Deduction: </p>
+                        </div>
+                        <div class="col-sm-3">
+                            <span id="deductionNumber"></span>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" checked="checked" class="custom-control-input" id="stdChecked" onclick="toggleStandardDeduction()">
+                                <label class="custom-control-label" for="stdChecked">With Standard Deduction</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <p>Customize: </p>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <p>Annual Income: </p>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="250000" value="50000" class="slider" id="myIncomeRange">            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 
-    <script>
-        let myChart = document.getElementById('myChart').getContext('2d');
-        var barChartData = {
-                labels:['Tax Brackets', 'Your Income', 'Tax Owed'],
-                datasets:[{
-                    label:'@ 10% Tax Rate',
-                    backgroundColor: '#FF5733',
-                    data:[
-                        9700,
-                        9700,
-                        9700
-                    ]
-                }, {
-                    label:'@ 12% Tax Rate',
-                    backgroundColor: '#FFBD33',
-                    data:[
-                        29775,
-                        29775,
-                        29775
-                    ]
-                }, {
-                    label:'@ 22% Tax Rate',
-                    backgroundColor: '#DBFF33',
-                    data:[
-                        44725,
-                        44725,
-                        44725
-                    ]
-                }, {
-                    label:'@ 24% Tax Rate',
-                    backgroundColor: '#75FF33',
-                    data:[
-                        76525,
-                        76525,
-                        76525
-                    ]
-                }, {
-                    label:'@ 32% Tax Rate',
-                    backgroundColor: '#33FF57',
-                    data:[
-                        43375,
-                        43375,
-                        43375
-                    ]
-                }, {
-                    label:'@ 35% Tax Rate',
-                    backgroundColor: '#33FFBD',
-                    data:[
-                        306200,
-                        306200,
-                        306200
-                    ]
-                }, {
-                    label:'@ 37% Tax Rate',
-                    backgroundColor: '#33F6FF',
-                    data:[
-                        50000,
-                        50000,
-                        50000
-                    ]
-                }]
-            };
-
-        let massPopChart = new Chart(myChart, {
-            type:'bar',
-            data:barChartData,
-            options:{
-                title: {
-                    display: true,
-                    text: 'Interactive Tax Bracket Visual'
-                },
-                responsive: true,
-                scales: {
-                    xAxes: [{
-							stacked: true,
-						}],
-                    yAxes: [{
-                        stacked: true
-                    }] 
-                }
-            }
-        });
-    </script>
+    <script src="./taxBracketChart.js"></script>
 </body>
 </html>
