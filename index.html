@@ -13,7 +13,12 @@
 </head>
 <body class='bg-white py-5'>
     <div class="row">
-        <div class="col-md-4 offset-md-2">
+        <div class="col-md-4 offset-md-4">
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
             <table class="table">
                 <thead class="thead-dark">
                   <tr>
@@ -68,8 +73,10 @@
                   </tr>
                 </tbody>
               </table>
-        </div>
-        <div class="col-md-4">
+        </div>             
+    </div>
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
             <div class="card">
                 <div class="card-body">
                     <div class="chart-container">
@@ -77,10 +84,10 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>   
     </div>
     <div class="row">
-        <div class="col-md-4 offset-md-2">
+        <div class="col-md-4 offset-md-4">
             <div class="card">
                 <div class="card-body">                
                     <div class="row">
@@ -89,6 +96,11 @@
                         </div>
                         <div class="col-sm-3">
                             <span id="incomeNumber"></span>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="250000" value="50000" class="slider" id="myIncomeRange">            
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -107,28 +119,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <p>Customize: </p>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <p>Annual Income: </p>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="slidecontainer">
-                                <input type="range" min="0" max="250000" value="50000" class="slider" id="myIncomeRange">            
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
+        </div>        
+    </div>    
 
     <script src="./taxBracketChart.js"></script>
 </body>
